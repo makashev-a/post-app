@@ -64,10 +64,6 @@ export default class App extends Component {
         })
     }
 
-    onAddError(error) {
-        this.setState({error});
-    }
-
     onToggleImportant(id) {
         this.setState(({data}) => {
             const index = data.findIndex(elem => elem.id === id);
@@ -152,8 +148,7 @@ export default class App extends Component {
                         onToggleLike={this.onToggleLike}/>
                     <PostAddForm
                         onAdd={this.addItem}
-                        error={error}
-                        onAddError={this.onAddError}/>
+                        error={error}/>
                 </AppBlock>
             // </div>
         )

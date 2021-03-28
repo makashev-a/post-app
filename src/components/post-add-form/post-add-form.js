@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorMessage from '../error-message';
 
 import './post-add-form.css';
 
@@ -6,15 +7,14 @@ export default class PostAddForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
-            error: false
+            text: ''
         }
         this.onValueChange = this.onValueChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onValueChange(e) {
-        const {text} = this.state;
+        const { text } = this.state;
         this.setState({
             text: e.target.value
         })
@@ -45,32 +45,30 @@ export default class PostAddForm extends Component {
     }
 
     render() {
-        const {error} = this.state;
-        const active = error;
-        const activeClass = active ? 'alert alert-danger mt-2' : 'd-none'
+        const { error } = this.state;
+
+        const errorMessage = error ? <ErrorMessage /> : null;
+
         return (
-            <div>
-            <form 
-                className="bottom-panel d-flex"
-                onSubmit={this.onSubmit}> 
-                <input
-                    type="text"
-                    placeholder="О чем вы думаете сейчас?"
-                    className="form-control new-post-label"
-                    onChange={this.onValueChange}
-                    value={this.state.text}
-                />
-                <button
-                    type="submit"
-                    className="btn btn-outline-secondary">
-                    Добавить
-                    </button>
-            </form>
-            <div className={activeClass}>
-                {/* Ошибка, введите текст! */}
-                Э далб, текст жазсай!
-            </div>
-            </div>
+            <>
+                <form
+                    className="bottom-panel d-flex"
+                    onSubmit={this.onSubmit}>
+                    <input
+                        type="text"
+                        placeholder="О чем вы думаете сейчас?"
+                        className="form-control new-post-label"
+                        onChange={this.onValueChange}
+                        value={this.state.text}
+                    />
+                    <button
+                        type="submit"
+                        className="btn btn-outline-secondary">
+                        Добавить
+                </button>
+                </form>
+                {errorMessage}
+            </>
         )
     }
 }
